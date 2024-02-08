@@ -1,3 +1,15 @@
+/* google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
+
+/* tailwind css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* common styles */
+body {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
