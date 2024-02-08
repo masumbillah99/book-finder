@@ -1,7 +1,7 @@
 import "./App.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import BookSection from "./product/BookSection";
+import BookSection from "./book/BookSection";
 
 function App() {
   return (
