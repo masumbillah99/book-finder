@@ -9,7 +9,10 @@ export default function BookData({ book, onFavorite }) {
         <img className="max-w-[144px]" src={book.img} alt="book name" />
       </div>
       <div className="space-y-3">
-        <h4 className="text-lg font-bold lg:text-xl">{book.title}</h4>
+        <h4 className="text-lg font-bold lg:text-xl">
+          {book.title}{" "}
+          <span className="text-sm font-normal">({book.publish_year})</span>
+        </h4>
         <p className="text-xs lg:text-sm">
           By : <span>{book.author}</span>
         </p>

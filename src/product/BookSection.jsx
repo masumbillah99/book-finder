@@ -1,14 +1,14 @@
-import ProductSearch from "./BookSearch";
-import ProductSort from "./BookSort";
 import bookImg from "../assets/book.png";
 import { useState } from "react";
 import BookData from "./BookData";
+import BookSearch from "./BookSearch";
+import BookSort from "./BookSort";
 
 export default function BookSection() {
   const [books, setBooks] = useState([
     {
       id: 1,
-      title: "Python Crash Course",
+      title: "Crash Python",
       img: bookImg,
       author: "Eric Matthes",
       price: 25,
@@ -18,12 +18,12 @@ export default function BookSection() {
     },
     {
       id: 2,
-      title: "JavaScript: The Good Parts",
+      title: "JavaScript Zero to Hero",
       img: bookImg,
       author: "Douglas Crockford",
       price: 30,
       rating: 4,
-      publish_year: 2008,
+      publish_year: 2018,
       isFavorite: false,
     },
     {
@@ -63,7 +63,7 @@ export default function BookSection() {
       author: "Michael Hartl",
       price: 26,
       rating: 4,
-      publish_year: 2012,
+      publish_year: 2022,
       isFavorite: false,
     },
     {
@@ -73,7 +73,7 @@ export default function BookSection() {
       author: "Jon Duckett",
       price: 24,
       rating: 3,
-      publish_year: 2011,
+      publish_year: 2021,
       isFavorite: false,
     },
     {
@@ -88,17 +88,19 @@ export default function BookSection() {
     },
   ]);
 
+  // favorite function handler
   function handleFavorite(bookId) {
     const bookIndex = books.findIndex((book) => book.id === bookId);
 
     const favBooks = [...books];
-    // toggle
+    // toggle favorite
     // if value is true make false
     // else make true
     favBooks[bookIndex].isFavorite = !favBooks[bookIndex].isFavorite;
     setBooks(favBooks);
   }
 
+  // search function handler
   function handleSearch(searchValue) {
     const filteredBooks = books.filter((book) =>
       book.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -107,8 +109,33 @@ export default function BookSection() {
     setBooks([...filteredBooks]);
   }
 
+  // sort function handler
+  function handleSort(e) {
+    const sortBy = e.target.value;
+    let sortedBooks = [...books];
+
+    switch (sortBy) {
+      case "name_asc":
+        sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "name_desc":
+        sortedBooks.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      case "year_asc":
+        sortedBooks.sort((a, b) => a.publish_year - b.publish_year);
+        break;
+      case "year_desc":
+        sortedBooks.sort((a, b) => b.publish_year - a.publish_year);
+        break;
+      default:
+        break;
+    }
+
+    setBooks(sortedBooks);
+  }
+
   return (
-    <div className="max-w-screen-xl mx-auto py-20">
+    <div className="max-w-screen-xl mx-auto py-14">
       {/* product header */}
       <div className="mx-auto flex items-end justify-between max-md:max-w-[95%] max-md:flex-col max-md:items-start max-md:space-y-4">
         <div>
@@ -117,9 +144,9 @@ export default function BookSection() {
             Trending Books of the Year
           </h2>
 
-          <ProductSearch onSearch={handleSearch} />
+          <BookSearch onSearch={handleSearch} />
         </div>
-        <ProductSort />
+        <BookSort onSort={handleSort} />
       </div>
 
       <div className="container mx-auto grid grid-cols-1 gap-8 max-w-7xl md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-10">
