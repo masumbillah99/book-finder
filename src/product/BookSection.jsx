@@ -99,6 +99,14 @@ export default function BookSection() {
     setBooks(favBooks);
   }
 
+  function handleSearch(searchValue) {
+    const filteredBooks = books.filter((book) =>
+      book.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
+    setBooks([...filteredBooks]);
+  }
+
   return (
     <div className="max-w-screen-xl mx-auto py-20">
       {/* product header */}
@@ -109,7 +117,7 @@ export default function BookSection() {
             Trending Books of the Year
           </h2>
 
-          <ProductSearch />
+          <ProductSearch onSearch={handleSearch} />
         </div>
         <ProductSort />
       </div>
