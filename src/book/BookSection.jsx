@@ -87,6 +87,7 @@ export default function BookSection() {
       isFavorite: false,
     },
   ]);
+  const [searched, setSearched] = useState(false);
 
   // favorite function handler
   function handleFavorite(bookId) {
@@ -102,11 +103,15 @@ export default function BookSection() {
 
   // search function handler
   function handleSearch(searchValue) {
-    const filteredBooks = books.filter((book) =>
-      book.title.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    if (!searched) {
+      let filteredBooks = books.filter((book) =>
+        book.title.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setBooks(filteredBooks);
 
-    setBooks([...filteredBooks]);
+      // stop search for second time on the matched results
+      setSearched(true);
+    }
   }
 
   // sort function handler
